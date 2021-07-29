@@ -13,3 +13,18 @@ export const useDebounce = <T>(value: T, delay: number) => {
   }, [value, delay]);
   return decounceValue;
 };
+
+export const useArray = <T>(array: T[]) => {
+  const [newArray, setnewArray] = useState(array);
+  return {
+    newArray,
+    setnewArray,
+    addItem: (item: T) => setnewArray([...newArray, item]),
+    deleteItem: (index: number) => {
+      let tempArray = [...newArray];
+      tempArray.splice(index, 1);
+      setnewArray(tempArray);
+    },
+    clearItem: () => setnewArray([]),
+  };
+};
