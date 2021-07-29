@@ -4,7 +4,7 @@ export const CleanObjectNull = (obj: object) => {
   return Object.fromEntries(Object.entries(obj).filter(([k, v]) => v));
 };
 
-export const useDebounce = (value: any, delay: number) => {
+export const useDebounce = <T>(value: T, delay: number) => {
   const [decounceValue, setDecounceValue] = useState(value);
   useEffect(() => {
     let timer = setTimeout(() => setDecounceValue(value), delay);
