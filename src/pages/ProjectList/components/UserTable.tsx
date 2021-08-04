@@ -1,12 +1,7 @@
 import React from "react";
 import { Table } from "antd";
-interface IUser {
-  name: string;
-  id: string;
-}
-interface IUserTable {
-  userList: IUser[];
-}
+import { IUserTable } from "../data";
+
 const columns = [
   {
     title: "姓名",

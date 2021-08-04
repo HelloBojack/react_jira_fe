@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-const apiUrl = process.env.REACT_APP_API_URL;
+
 interface IForm {
   username: string;
   password: string;
@@ -8,17 +8,6 @@ interface IForm {
 const Login = () => {
   const onFinish = (values: IForm) => {
     console.log(values);
-    fetch(`${apiUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    }).then(async (res) => {
-      if (res.ok) {
-        console.log(await res.json());
-      }
-    });
   };
   return (
     <>
