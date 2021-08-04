@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Form, Input, Button } from "antd";
+const apiUrl = process.env.REACT_APP_API_URL;
 interface IForm {
   username: string;
   password: string;
@@ -7,7 +8,7 @@ interface IForm {
 const Login = () => {
   const onFinish = (values: IForm) => {
     console.log(values);
-    fetch("/login", {
+    fetch(`${apiUrl}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
