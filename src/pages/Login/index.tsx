@@ -1,16 +1,16 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
+import { useAuth } from "context/auth_context";
+import { IUser } from "pages/ProjectList/data";
 
-interface IForm {
-  username: string;
-  password: string;
-}
 const Login = () => {
-  const onFinish = (values: IForm) => {
-    console.log(values);
+  const { user, login, register } = useAuth();
+  const onFinish = (values: IUser) => {
+    login(values);
   };
   return (
     <>
+      <div>登录成功!{user?.name}</div>
       <Form onFinish={onFinish}>
         <Form.Item label="username" name="username">
           <Input />
@@ -20,7 +20,7 @@ const Login = () => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            登录
           </Button>
         </Form.Item>
       </Form>

@@ -1,4 +1,4 @@
-import { IUser } from "./pages/ProjectList/data";
+import { IUser, IUserRes } from "pages/ProjectList/data";
 const localStorageKey = "__auth_provider_token__";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -6,13 +6,13 @@ export const getToken = () => {
   localStorage.getItem(localStorageKey);
 };
 
-export const handleUserResponse = ({ user }: { user: IUser }) => {
+export const handleUserResponse = ({ user }: { user: IUserRes }) => {
   localStorage.setItem(localStorageKey, user.token || "");
   return user;
 };
 
 export const login = (data: IUser) => {
-  fetch(`${apiUrl}/login`, {
+  return fetch(`${apiUrl}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,12 +21,14 @@ export const login = (data: IUser) => {
   }).then(async (res) => {
     if (res.ok) {
       return handleUserResponse(await res.json());
+    } else {
+      return Promise.reject(data);
     }
   });
 };
 
 export const register = (data: IUser) => {
-  fetch(`${apiUrl}/register`, {
+  return fetch(`${apiUrl}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,7 +37,9 @@ export const register = (data: IUser) => {
   }).then(async (res) => {
     if (res.ok) {
       return handleUserResponse(await res.json());
+    } else {
+      return Promise.reject(data);
     }
   });
 };
-export const logout = () => localStorage.removeItem(localStorageKey);
+export const logout = async () => localStorage.removeItem(localStorageKey);
