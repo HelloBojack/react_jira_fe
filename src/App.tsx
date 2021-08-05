@@ -4,13 +4,16 @@ import React from "react";
 import Login from "pages/Login";
 import "./App.css";
 import "antd/dist/antd.css";
+import { useAuth } from "context/auth_context";
+import Index from "pages/Index";
 
 const App = () => {
+  let { user } = useAuth();
   return (
     <div>
       {/* <ProjectList /> */}
       {/* <TSTest /> */}
-      <Login />
+      {user ? <Index /> : <Login />}
     </div>
   );
 };

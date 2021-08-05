@@ -4,14 +4,14 @@ import { useAuth } from "context/auth_context";
 import { IUser } from "pages/ProjectList/data";
 
 const Login = () => {
-  const { user, login, register } = useAuth();
+  const [form] = Form.useForm();
+  const { login, register } = useAuth();
   const onFinish = (values: IUser) => {
     login(values);
   };
   return (
     <>
-      <div>登录成功!{user?.name}</div>
-      <Form onFinish={onFinish}>
+      <Form onFinish={onFinish} form={form}>
         <Form.Item label="username" name="username">
           <Input />
         </Form.Item>
@@ -21,6 +21,21 @@ const Login = () => {
         <Form.Item>
           <Button type="primary" htmlType="submit">
             登录
+          </Button>
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            onClick={() => {
+              form
+                .validateFields()
+                .then((values) => {
+                  register(values);
+                })
+                .catch((errorInfo) => console.log(errorInfo));
+            }}
+          >
+            注册
           </Button>
         </Form.Item>
       </Form>
