@@ -31,7 +31,6 @@ export const useHttp = () => {
     });
   };
   const get = (path: string, data: object) => {
-    console.log(path, data);
     return init("GET", path, data);
   };
   const post = (path: string, data: object) => {

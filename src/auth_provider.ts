@@ -3,7 +3,7 @@ const localStorageKey = "__auth_provider_token__";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export const getToken = () => {
-  localStorage.getItem(localStorageKey);
+  return localStorage.getItem(localStorageKey);
 };
 
 export const handleUserResponse = ({ user }: { user: IUserRes }) => {
