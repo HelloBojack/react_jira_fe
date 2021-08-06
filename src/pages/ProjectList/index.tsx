@@ -7,7 +7,7 @@ const ProjectList = () => {
   const { get } = useHttp();
   const [searchParams, setsearchParams] = useState({
     name: "",
-    workname: "",
+    organization: "",
   });
   const [userList, setuserList] = useState([]);
   const debouncesearchParams = useDebounce(searchParams, 250);
@@ -15,6 +15,7 @@ const ProjectList = () => {
     get("projects", CleanObjectNull(debouncesearchParams)).then((res) =>
       setuserList(res)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncesearchParams]);
   return (
     <>

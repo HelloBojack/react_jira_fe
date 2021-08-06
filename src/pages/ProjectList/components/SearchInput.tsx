@@ -4,7 +4,7 @@ const { Option } = Select;
 interface ISearchInput {
   searchParams: {
     name: string;
-    workname: string;
+    organization: string;
   };
   setsearchParams: (searchParams: ISearchInput["searchParams"]) => void;
 }
@@ -14,24 +14,25 @@ const SearchInput = ({ searchParams, setsearchParams }: ISearchInput) => {
       <Form>
         <Row>
           <Col span={6} offset={6}>
-            <Form.Item name="workname">
+            <Form.Item name="name">
               <Input
-                placeholder="input placeholder"
                 onChange={(e) =>
-                  setsearchParams({ ...searchParams, workname: e.target.value })
+                  setsearchParams({ ...searchParams, name: e.target.value })
                 }
               />
             </Form.Item>
           </Col>
           <Col span={6}>
-            <Form.Item name="name">
+            <Form.Item name="organization">
               <Select<string>
                 style={{ width: 200 }}
-                onChange={(e) => setsearchParams({ ...searchParams, name: e })}
+                onChange={(e) =>
+                  setsearchParams({ ...searchParams, organization: e })
+                }
               >
-                <Option value="bojack">bojack</Option>
-                <Option value="xlk">xlk</Option>
-                <Option value="w">w</Option>
+                <Option value=""> </Option>
+                <Option value="外卖组">外卖组</Option>
+                <Option value="团购组">团购组</Option>
               </Select>
             </Form.Item>
           </Col>
