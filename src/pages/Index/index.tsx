@@ -20,6 +20,7 @@ import {
   NotificationOutlined,
 } from "@ant-design/icons";
 import HeaderPro from "./components/HeaderPro";
+import ProjectList from "pages/ProjectList";
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
@@ -68,13 +69,12 @@ const Index = () => {
           <Content
             className="site-layout-background"
             style={{
-              padding: 24,
               margin: 0,
               minHeight: "80vh",
               background: "#fff",
             }}
           >
-            Content
+            <ProjectList />
           </Content>
           <Footer style={{ textAlign: "center" }}>
             Create by Bojack @2021

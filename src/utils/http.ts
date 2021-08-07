@@ -4,7 +4,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export const useHttp = () => {
   let { user, logout } = useAuth();
-  const init = (method: string, path: string, data: object) => {
+  const init = (method: string, path: string, data?: object) => {
     let config = {
       method,
       headers: {
@@ -30,7 +30,7 @@ export const useHttp = () => {
       }
     });
   };
-  const get = (path: string, data: object) => {
+  const get = (path: string, data?: object) => {
     return init("GET", path, data);
   };
   const post = (path: string, data: object) => {

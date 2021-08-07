@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "antd";
-import { IUserTable } from "../data";
+import { IProjectsTable } from "../data";
 
 const columns = [
   {
@@ -9,21 +9,21 @@ const columns = [
     key: "name",
   },
   {
-    title: "组织",
+    title: "部门",
     dataIndex: "organization",
     key: "organization",
   },
 ];
 
-const UserTable = ({ userList }: IUserTable) => {
+const ProjectsTable = ({ projectsList }: IProjectsTable) => {
   return (
     <>
       <Table
-        dataSource={userList}
+        dataSource={projectsList}
         columns={columns}
         rowKey={(row) => row.id}
       ></Table>
     </>
   );
 };
-export default UserTable;
+export default ProjectsTable;

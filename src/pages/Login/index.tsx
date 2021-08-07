@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Card, Divider } from "antd";
 import { useAuth } from "context/auth_context";
-import { IUser } from "pages/ProjectList/data";
+import { IProjects } from "pages/ProjectList/data";
 import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
@@ -11,7 +11,7 @@ const Login = () => {
   const [form] = Form.useForm();
   const { login, register } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
-  const onFinish = (values: IUser) => {
+  const onFinish = (values: IProjects) => {
     if (isRegister) {
       register(values);
     } else {

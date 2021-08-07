@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as auth from "auth_provider";
-import { IUser, IUserRes } from "pages/ProjectList/data";
+import { IProjects, IProjectsRes } from "pages/ProjectList/data";
 const AuthContext = React.createContext<
   | {
-      user: IUserRes | null;
-      login: (data: IUser) => Promise<void>;
-      register: (data: IUser) => Promise<void>;
+      user: IProjectsRes | null;
+      login: (data: IProjects) => Promise<void>;
+      register: (data: IProjects) => Promise<void>;
       logout: () => Promise<void>;
     }
   | undefined
@@ -14,11 +14,12 @@ const AuthContext = React.createContext<
 AuthContext.displayName = "AuthContext";
 const apiUrl = process.env.REACT_APP_API_URL;
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<IUserRes | null>(null);
+  const [user, setUser] = useState<IProjectsRes | null>(null);
   // const { get } = useHttp();
   // user => setUser(user) => setUser
-  const login = (data: IUser) => auth.login(data).then((user) => setUser(user));
-  const register = (data: IUser) => auth.register(data).then(setUser);
+  const login = (data: IProjects) =>
+    auth.login(data).then((user) => setUser(user));
+  const register = (data: IProjects) => auth.register(data).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));
   const initUser = async () => {
     const token = auth.getToken();

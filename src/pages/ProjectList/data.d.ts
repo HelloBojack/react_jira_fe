@@ -1,13 +1,20 @@
-export interface IUser {
+export interface IProjects {
   username: string;
   id: string;
   token: string;
 }
-export interface IUserRes {
+export interface IProjectsRes {
   name: string;
   id: string;
   token: string;
 }
-export interface IUserTable {
-  userList: IUser[];
+export interface IProjectsTable {
+  projectsList: IProjects[];
+}
+
+export interface IUser {
+  id: number;
+  name: string;
+  organization: string;
+  ownerId: number;
 }

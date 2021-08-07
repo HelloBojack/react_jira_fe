@@ -1,4 +1,4 @@
-import { IUser, IUserRes } from "pages/ProjectList/data";
+import { IProjects, IProjectsRes } from "pages/ProjectList/data";
 const localStorageKey = "__auth_provider_token__";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -6,12 +6,12 @@ export const getToken = () => {
   return localStorage.getItem(localStorageKey);
 };
 
-export const handleUserResponse = ({ user }: { user: IUserRes }) => {
+export const handleUserResponse = ({ user }: { user: IProjectsRes }) => {
   localStorage.setItem(localStorageKey, user.token || "");
   return user;
 };
 
-export const login = (data: IUser) => {
+export const login = (data: IProjects) => {
   return fetch(`${apiUrl}/login`, {
     method: "POST",
     headers: {
@@ -27,7 +27,7 @@ export const login = (data: IUser) => {
   });
 };
 
-export const register = (data: IUser) => {
+export const register = (data: IProjects) => {
   return fetch(`${apiUrl}/register`, {
     method: "POST",
     headers: {
