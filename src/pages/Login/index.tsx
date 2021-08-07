@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form, Input, Button, Card, Divider } from "antd";
 import { useAuth } from "context/auth_context";
 import { IProjects } from "pages/ProjectList/data";

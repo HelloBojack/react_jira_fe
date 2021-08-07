@@ -10,9 +10,11 @@ export interface IProjectsRes {
 }
 export interface IProjectsTable {
   projectsList: IProjects[];
+  userList: IUser[];
 }
 
 export interface IUser {
+  item: number;
   id: number;
   name: string;
   organization: string;

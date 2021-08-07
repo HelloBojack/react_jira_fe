@@ -1,11 +1,10 @@
-import React from "react";
 import { Input, Select, Row, Col, Form, Button } from "antd";
 import { IUser } from "../data";
 const { Option } = Select;
 interface ISearchInput {
   searchParams: {
     name: string;
-    organization: string;
+    personId: string;
   };
   setsearchParams: (searchParams: ISearchInput["searchParams"]) => void;
   userList: IUser[];
@@ -29,16 +28,16 @@ const SearchInput = ({
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item label="负责人" name="organization">
+            <Form.Item label="负责人" name="personId">
               <Select<string>
                 style={{ width: 120 }}
                 onChange={(e) =>
-                  setsearchParams({ ...searchParams, organization: e })
+                  setsearchParams({ ...searchParams, personId: e })
                 }
                 allowClear
               >
                 {userList.map((user) => (
-                  <Option value={user.name} key={user.id}>
+                  <Option value={user.id} key={user.id}>
                     {user.name}
                   </Option>
                 ))}

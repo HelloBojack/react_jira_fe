@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SearchInput from "./components/SearchInput";
 import ProjectsTable from "./components/ProjectsTable";
 import { CleanObjectNull, useDebounce } from "utils";
@@ -9,7 +9,7 @@ const ProjectList = () => {
   const { get } = useHttp();
   const [searchParams, setsearchParams] = useState({
     name: "",
-    organization: "",
+    personId: "",
   });
   const [userList, setUserList] = useState<IUser[]>([]);
   const [projectsList, setuserList] = useState([]);
@@ -29,7 +29,7 @@ const ProjectList = () => {
         setsearchParams={setsearchParams}
         userList={userList}
       />
-      <ProjectsTable projectsList={projectsList} />
+      <ProjectsTable projectsList={projectsList} userList={userList} />
     </>
   );
 };
