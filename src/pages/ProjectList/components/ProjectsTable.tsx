@@ -2,7 +2,7 @@ import { Table } from "antd";
 import dayjs from "dayjs";
 import { IProjectsTable } from "../data";
 
-const ProjectsTable = ({ projectsList, userList }: IProjectsTable) => {
+const ProjectsTable = ({ userList, ...props }: IProjectsTable) => {
   const columns = [
     {
       title: "工作",
@@ -29,11 +29,7 @@ const ProjectsTable = ({ projectsList, userList }: IProjectsTable) => {
   ];
   return (
     <>
-      <Table
-        dataSource={projectsList}
-        columns={columns}
-        rowKey={(row) => row.id}
-      ></Table>
+      <Table columns={columns} rowKey={(row) => row.id} {...props} />
     </>
   );
 };

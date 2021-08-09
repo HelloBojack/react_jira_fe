@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { useAuth } from "context/auth_context";
 import qs from "qs";
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -23,10 +24,13 @@ export const useHttp = () => {
         window.location.reload();
         return Promise.reject({ message: "登录已失效，请重新登录" });
       }
+      let result = await res.json();
       if (res.ok) {
-        return await res.json();
+        return result;
       } else {
-        return Promise.reject(res.json());
+        message.error(result.message);
+
+        return Promise.reject(await res.json());
       }
     });
   };

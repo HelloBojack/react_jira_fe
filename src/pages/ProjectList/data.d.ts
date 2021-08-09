@@ -1,3 +1,5 @@
+import { TableProps } from "antd/lib/table";
+
 export interface IProjects {
   username: string;
   id: string;
@@ -8,8 +10,7 @@ export interface IProjectsRes {
   id: string;
   token: string;
 }
-export interface IProjectsTable {
-  projectsList: IProjects[];
+export interface IProjectsTable extends TableProps<IProjects> {
   userList: IUser[];
 }
 
