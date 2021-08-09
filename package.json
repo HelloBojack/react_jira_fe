@@ -56,7 +56,8 @@
     "json-server": "^0.16.3",
     "lint-staged": ">=10",
     "prettier": "2.3.2",
-    "qs": "^6.10.1"
+    "qs": "^6.10.1",
+    "react-query": "^3.19.2"
   },
   "lint-staged": {
     "*.{js,css,md,ts,tsx}": "prettier --write"
