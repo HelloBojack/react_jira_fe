@@ -1,4 +1,5 @@
 import { IProjects, IProjectsRes } from "pages/ProjectList/data";
+import { message } from "antd";
 const localStorageKey = "__auth_provider_token__";
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -19,10 +20,12 @@ export const login = (data: IProjects) => {
     },
     body: JSON.stringify(data),
   }).then(async (res) => {
+    let result = await res.json();
     if (res.ok) {
-      return handleUserResponse(await res.json());
+      return handleUserResponse(result);
     } else {
-      return Promise.reject(data);
+      message.error(result.message);
+      return Promise.reject(result);
     }
   });
 };

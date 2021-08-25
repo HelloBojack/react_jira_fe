@@ -2,11 +2,18 @@ import { message } from "antd";
 import { useAuth } from "context/auth_context";
 import qs from "qs";
 const apiUrl = process.env.REACT_APP_API_URL;
-
+interface httpConfig {
+  method: string;
+  body?: string;
+  headers: {
+    Authorization: string;
+    "Content-Type": string;
+  };
+}
 export const useHttp = () => {
   let { user, logout } = useAuth();
   const init = (method: string, path: string, data?: object) => {
-    let config = {
+    let config: httpConfig = {
       method,
       headers: {
         Authorization: `Bearer ${user?.token}`,
@@ -16,7 +23,7 @@ export const useHttp = () => {
     if (method.toUpperCase() === "GET") {
       path += `?${qs.stringify(data)}`;
     } else {
-      // config.body = JSON.stringify(data);
+      config.body = JSON.stringify(data);
     }
     return fetch(`${apiUrl}/${path}`, config).then(async (res) => {
       if (res.status === 401) {
@@ -29,8 +36,7 @@ export const useHttp = () => {
         return result;
       } else {
         message.error(result.message);
-
-        return Promise.reject(await res.json());
+        return Promise.reject(result);
       }
     });
   };
@@ -38,7 +44,7 @@ export const useHttp = () => {
     return init("GET", path, data);
   };
   const post = (path: string, data: object) => {
-    init("POST", path, data);
+    return init("POST", path, data);
   };
   return { get, post };
 };

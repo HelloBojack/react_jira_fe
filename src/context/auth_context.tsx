@@ -20,7 +20,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // const { get } = useHttp();
   // user => setUser(user) => setUser
   const login = (data: IProjects) =>
-    auth.login(data).then((user) => setUser(user));
+    auth
+      .login(data)
+      .then((user) => setUser(user))
+      .catch((error) => console.log(error));
   const register = (data: IProjects) => auth.register(data).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null));
   const initUser = async () => {
@@ -44,7 +47,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     execute();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(status);
 
   if (status === "idle" || status === "pending") {
     return <FullLoading />;

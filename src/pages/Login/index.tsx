@@ -11,6 +11,7 @@ const Login = () => {
   const [form] = Form.useForm();
   const { login, register } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
+
   const onFinish = (values: IProjects) => {
     if (isRegister) {
       register(values);

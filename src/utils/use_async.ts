@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export const useAsync = <T>(asyncFn: () => Promise<T>) => {
+export const useAsync = <T>(asyncFn: () => Promise<T>, immediate = false) => {
   const [status, setStatus] = useState("idle");
   const [value, setValue] = useState<null>();
   const [error, setError] = useState<null>();
@@ -14,7 +14,6 @@ export const useAsync = <T>(asyncFn: () => Promise<T>) => {
       .then((response: any) => {
         setValue(response);
         setLoading(false);
-        console.log(response);
         setStatus("success");
       })
       .catch((error: any) => {
@@ -23,6 +22,12 @@ export const useAsync = <T>(asyncFn: () => Promise<T>) => {
         setStatus("error");
       });
   }, [asyncFn]);
+
+  useEffect(() => {
+    if (immediate) {
+      execute();
+    }
+  }, [execute, immediate]);
 
   return {
     execute,
