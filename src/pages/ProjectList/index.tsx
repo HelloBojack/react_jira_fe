@@ -6,6 +6,7 @@ import { useHttp } from "utils/http";
 import { PageHeader } from "antd";
 // import { IUser } from "./data";
 import { useAsync } from "utils/use_async";
+import { useMount } from "../../utils/use_mount";
 const ProjectList = () => {
   const { get } = useHttp();
   const [searchParams, setsearchParams] = useState({
@@ -22,10 +23,8 @@ const ProjectList = () => {
     get("users")
   );
 
-  useEffect(() => {
-    getUserList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useMount(() => getUserList());
+
   useEffect(() => {
     getProjectList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
