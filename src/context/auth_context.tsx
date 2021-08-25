@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as auth from "auth_provider";
 import { IProjects, IProjectsRes } from "pages/ProjectList/data";
+import { FullLoading } from "components/common/index";
+import { useAsync } from "utils/use_async";
 const AuthContext = React.createContext<
   | {
       user: IProjectsRes | null;
@@ -24,7 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const initUser = async () => {
     const token = auth.getToken();
     if (token) {
-      fetch(`${apiUrl}/me`, {
+      const user = await fetch(`${apiUrl}/me`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -32,13 +34,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }).then(async (res) => {
         const data = await res.json();
         let user = data.user;
-        setUser(user);
+        return user;
       });
+      setUser(user);
     }
   };
+  const { execute, status, value, error } = useAsync(initUser);
   useEffect(() => {
-    initUser();
+    execute();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(status);
+
+  if (status === "idle" || status === "pending") {
+    return <FullLoading />;
+  }
   return (
     <AuthContext.Provider
       value={{ user, login, register, logout }}
