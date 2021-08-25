@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(user);
     }
   };
-  const { execute, status, value, error } = useAsync(initUser);
+  const { execute, status } = useAsync(initUser);
   useEffect(() => {
     execute();
     // eslint-disable-next-line react-hooks/exhaustive-deps

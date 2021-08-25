@@ -4,30 +4,30 @@ import ProjectsTable from "./components/ProjectsTable";
 import { CleanObjectNull, useDebounce } from "utils";
 import { useHttp } from "utils/http";
 import { PageHeader } from "antd";
-import { IUser } from "./data";
+// import { IUser } from "./data";
+import { useAsync } from "utils/use_async";
 const ProjectList = () => {
   const { get } = useHttp();
-  const [loading, setLoading] = useState(false);
   const [searchParams, setsearchParams] = useState({
     name: "",
     personId: "",
   });
-  const [userList, setUserList] = useState<IUser[]>([]);
-  const [projectsList, setuserList] = useState([]);
   const debouncesearchParams = useDebounce(searchParams, 250);
+  const {
+    execute: getProjectList,
+    value: projectsList,
+    loading,
+  } = useAsync(() => get("projects", CleanObjectNull(debouncesearchParams)));
+  const { execute: getUserList, value: userList } = useAsync(() =>
+    get("users")
+  );
+
   useEffect(() => {
-    get("users").then((res) => setUserList(res));
+    getUserList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    setLoading(true);
-    get("projects", CleanObjectNull(debouncesearchParams))
-      .then((res) => setuserList(res))
-      .catch((err) => {
-        setuserList([]);
-      })
-      .finally(() => setLoading(false));
-
+    getProjectList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncesearchParams]);
   return (
@@ -36,11 +36,11 @@ const ProjectList = () => {
       <SearchInput
         searchParams={searchParams}
         setsearchParams={setsearchParams}
-        userList={userList}
+        userList={userList || []}
       />
       <ProjectsTable
-        dataSource={projectsList}
-        userList={userList}
+        dataSource={projectsList || []}
+        userList={userList || []}
         loading={loading}
       />
     </>
