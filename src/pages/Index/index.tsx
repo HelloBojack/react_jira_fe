@@ -21,6 +21,7 @@ import {
 } from "@ant-design/icons";
 import HeaderPro from "./components/HeaderPro";
 import ProjectList from "pages/ProjectList";
+// import { TestPage } from "pages/TestPage";
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
@@ -75,6 +76,7 @@ const Index = () => {
             }}
           >
             <ProjectList />
+            {/* <TestPage></TestPage> */}
           </Content>
           <Footer style={{ textAlign: "center" }}>
             Create by Bojack @2021
