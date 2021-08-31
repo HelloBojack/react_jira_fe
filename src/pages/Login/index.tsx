@@ -6,8 +6,10 @@ import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
+import { useTitle } from "utils";
 
 const Login = () => {
+  useTitle("欢迎进入Jira项目管理系统！");
   const [form] = Form.useForm();
   const { login, register } = useAuth();
   const [isRegister, setIsRegister] = useState(false);

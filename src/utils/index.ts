@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const CleanObjectNull = (obj: object) => {
   return Object.fromEntries(Object.entries(obj).filter(([k, v]) => v));
@@ -27,4 +27,17 @@ export const useArray = <T>(array: T[]) => {
     },
     clearItem: () => setnewArray([]),
   };
+};
+
+export const useTitle = (title: string) => {
+  const preTitle = useRef(document.title);
+  useEffect(() => {
+    document.title = title;
+    let tempTitle = preTitle.current;
+
+    return () => {
+      document.title = tempTitle;
+    };
+    // eslint-disable-next-line
+  }, [title]);
 };

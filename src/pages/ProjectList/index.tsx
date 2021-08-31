@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import SearchInput from "./components/SearchInput";
 import ProjectsTable from "./components/ProjectsTable";
-import { CleanObjectNull, useDebounce } from "utils";
+import { CleanObjectNull, useDebounce, useTitle } from "utils";
 import { useHttp } from "utils/http";
 import { PageHeader } from "antd";
 // import { IUser } from "./data";
 import { useAsync } from "utils/use_async";
 import { useMount } from "../../utils/use_mount";
 const ProjectList = () => {
+  useTitle("项目列表");
   const { get } = useHttp();
   const [searchParams, setsearchParams] = useState({
     name: "",
