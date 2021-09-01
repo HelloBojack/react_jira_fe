@@ -24,17 +24,17 @@ const ProjectList = () => {
           style={{ height: "100%" }}
         >
           <Menu.Item key="1">
-            <Link to={"board"}>看板</Link>
+            <Link to={"TaskBoard"}>看板</Link>
           </Menu.Item>
           <Menu.Item key="2">
-            <Link to={"taskGroup"}>任务组</Link>
+            <Link to={"TaskGroup"}>任务组</Link>
           </Menu.Item>
         </Menu>
       </Sider>
       <Content style={{ padding: "0 24px", minHeight: 280 }}>
         <Routes>
-          <Route path={"/board"} element={<>board</>} />
-          <Route path={"/taskGroup"} element={<>taskGroup</>} />
+          <Route path={"/TaskBoard"} element={<>TaskBoard</>} />
+          <Route path={"/TaskGroup"} element={<>TaskGroup</>} />
         </Routes>
       </Content>
     </Layout>

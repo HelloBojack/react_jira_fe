@@ -38,7 +38,7 @@ const ProjectsTable = ({ userList, ...props }: IProjectsTable) => {
           return {
             onClick: () => {
               console.log(record.id);
-              navigate(`/project/${record.id}/board`);
+              navigate(`/project/${record.id}/TaskBoard`);
             },
           };
         }}
