@@ -15,7 +15,7 @@ const SearchInput = ({
   userList,
 }: ISearchInput) => {
   return (
-    <div style={{ padding: "12px 24px 0" }}>
+    <>
       <Form labelCol={{ span: 4 }}>
         <Row gutter={24}>
           <Col span={8}>
@@ -51,7 +51,7 @@ const SearchInput = ({
           </Col>
         </Row>
       </Form>
-    </div>
+    </>
   );
 };
 export default SearchInput;

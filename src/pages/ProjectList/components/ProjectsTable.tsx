@@ -1,8 +1,10 @@
 import { Table } from "antd";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router";
 import { IProjectsTable } from "../data";
 
 const ProjectsTable = ({ userList, ...props }: IProjectsTable) => {
+  let navigate = useNavigate();
   const columns = [
     {
       title: "工作",
@@ -29,7 +31,19 @@ const ProjectsTable = ({ userList, ...props }: IProjectsTable) => {
   ];
   return (
     <>
-      <Table columns={columns} rowKey={(row) => row.id} {...props} />
+      <Table
+        columns={columns}
+        rowKey={(row) => row.id}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              console.log(record.id);
+              navigate(`/project/${record.id}/board`);
+            },
+          };
+        }}
+        {...props}
+      />
     </>
   );
 };
