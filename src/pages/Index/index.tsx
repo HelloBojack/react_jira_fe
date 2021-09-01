@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Layout } from "antd";
 import HeaderPro from "./components/HeaderPro";
@@ -31,6 +31,7 @@ const Index = () => {
           <Routes>
             <Route path={"/projects"} element={<ProjectList />} />
             <Route path={"/project/:id/*"} element={<ProjectPage />} />
+            <Navigate to={"/projects"} replace={true} />
           </Routes>
           {/* <Useref></Useref> */}
           {/* <ProjectList /> */}
