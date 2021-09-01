@@ -3,8 +3,11 @@ import { Button, Dropdown, Menu } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { useAuth } from "context/auth_context";
+import { useNavigate } from "react-router";
 const HeaderPro = () => {
   const { user, logout } = useAuth();
+  let navigate = useNavigate();
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -17,7 +20,11 @@ const HeaderPro = () => {
   return (
     <>
       <StyledHeader>
-        <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        <SoftwareLogo
+          width={"18rem"}
+          color={"rgb(38, 132, 255)"}
+          onClick={() => navigate("/")}
+        />
 
         <Dropdown overlay={menu} placement="bottomCenter">
           <Button type="link">Hi,{user?.name}</Button>
