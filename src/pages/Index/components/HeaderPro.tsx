@@ -12,7 +12,13 @@ const HeaderPro = () => {
   const menu = (
     <Menu>
       <Menu.Item>
-        <Button type="link" onClick={logout}>
+        <Button
+          type="link"
+          onClick={() => {
+            logout();
+            navigate("/");
+          }}
+        >
           登出
         </Button>
       </Menu.Item>
