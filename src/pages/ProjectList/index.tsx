@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import SearchInput from "./components/SearchInput";
 import ProjectsTable from "./components/ProjectsTable";
 import { CleanObjectNull, useDebounce, useTitle } from "utils";
@@ -8,14 +8,21 @@ import { PageHeader } from "antd";
 import { useAsync } from "utils/use_async";
 import { useMount } from "../../utils/use_mount";
 import { Content } from "antd/lib/layout/layout";
+import { useUrlQueryParams } from "utils/use_UrlQueryParams";
 const ProjectList = () => {
   useTitle("项目列表");
+
   const { get } = useHttp();
-  const [searchParams, setsearchParams] = useState({
-    name: "",
-    personId: "",
-  });
+  // const [searchParams, setsearchParams] = useState({
+  //   name: "",
+  //   personId: "",
+  // });
+  const [searchParams, setsearchParams] = useUrlQueryParams([
+    "name",
+    "personId",
+  ]);
   const debouncesearchParams = useDebounce(searchParams, 250);
+
   const {
     execute: getProjectList,
     value: projectsList,

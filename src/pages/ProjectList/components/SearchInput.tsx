@@ -16,7 +16,7 @@ const SearchInput = ({
 }: ISearchInput) => {
   return (
     <>
-      <Form labelCol={{ span: 4 }}>
+      <Form labelCol={{ span: 4 }} initialValues={searchParams}>
         <Row gutter={24}>
           <Col span={8}>
             <Form.Item label="项目名" name="name">
@@ -32,12 +32,12 @@ const SearchInput = ({
               <Select<string>
                 style={{ width: 120 }}
                 onChange={(e) =>
-                  setsearchParams({ ...searchParams, personId: e })
+                  setsearchParams({ ...searchParams, personId: e || "" })
                 }
                 allowClear
               >
                 {userList.map((user) => (
-                  <Option value={user.id} key={user.id}>
+                  <Option value={String(user.id)} key={user.id}>
                     {user.name}
                   </Option>
                 ))}
