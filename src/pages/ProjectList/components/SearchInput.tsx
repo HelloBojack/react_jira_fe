@@ -1,14 +1,7 @@
-import { Input, Select, Row, Col, Form, Button } from "antd";
-import { IUser } from "../data";
-const { Option } = Select;
-interface ISearchInput {
-  searchParams: {
-    name: string;
-    personId: string;
-  };
-  setsearchParams: (searchParams: ISearchInput["searchParams"]) => void;
-  userList: IUser[];
-}
+import { Input, Row, Col, Form, Button } from "antd";
+import { ISearchInput } from "../data";
+import { UserSelect } from "./UserSelect";
+
 const SearchInput = ({
   searchParams,
   setsearchParams,
@@ -29,19 +22,11 @@ const SearchInput = ({
           </Col>
           <Col span={8}>
             <Form.Item label="负责人" name="personId">
-              <Select<string>
-                style={{ width: 120 }}
-                onChange={(e) =>
-                  setsearchParams({ ...searchParams, personId: e || "" })
-                }
-                allowClear
-              >
-                {userList.map((user) => (
-                  <Option value={String(user.id)} key={user.id}>
-                    {user.name}
-                  </Option>
-                ))}
-              </Select>
+              <UserSelect
+                searchParams={searchParams}
+                setsearchParams={setsearchParams}
+                userList={userList}
+              />
             </Form.Item>
           </Col>
           <Col span={8} style={{ textAlign: "right" }}>

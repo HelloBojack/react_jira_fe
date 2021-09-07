@@ -7,7 +7,7 @@ export interface IProjects {
 }
 export interface IProjectsRes {
   name: string;
-  id: string;
+  personId: string;
   token: string;
 }
 export interface IProjectsTable extends TableProps<IProjects> {
@@ -20,4 +20,10 @@ export interface IUser {
   name: string;
   organization: string;
   ownerId: number;
+}
+
+export interface ISearchInput {
+  searchParams: Pick<IProjectsRes, "name" | "personId">;
+  setsearchParams: (searchParams: ISearchInput["searchParams"]) => void;
+  userList: IUser[];
 }

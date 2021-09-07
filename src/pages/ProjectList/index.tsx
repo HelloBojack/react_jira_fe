@@ -13,10 +13,6 @@ const ProjectList = () => {
   useTitle("项目列表");
 
   const { get } = useHttp();
-  // const [searchParams, setsearchParams] = useState({
-  //   name: "",
-  //   personId: "",
-  // });
   const [searchParams, setsearchParams] = useUrlQueryParams([
     "name",
     "personId",
