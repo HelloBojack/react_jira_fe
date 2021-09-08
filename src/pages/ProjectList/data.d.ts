@@ -4,6 +4,7 @@ export interface IProjects {
   username: string;
   id: string;
   token: string;
+  pin: boolean;
 }
 export interface IProjectsRes {
   name: string;
