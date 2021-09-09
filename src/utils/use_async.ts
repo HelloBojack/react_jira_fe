@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useMountedRef } from "./hooks";
 
 export const useAsync = <T>(
   asyncFn: (params?: any) => Promise<T>,
@@ -8,18 +9,21 @@ export const useAsync = <T>(
   const [value, setValue] = useState<null>();
   const [error, setError] = useState<null>();
   const [loading, setLoading] = useState(false);
+
+  const mountedRef = useMountedRef();
   const execute = useCallback(
     (params?) => {
-      console.log(params);
       setStatus("pending");
       setLoading(true);
       setValue(null);
       setError(null);
       return asyncFn(params)
         .then((response: any) => {
-          setValue(response);
-          setLoading(false);
-          setStatus("success");
+          if (mountedRef.current) {
+            setValue(response);
+            setLoading(false);
+            setStatus("success");
+          }
         })
         .catch((error: any) => {
           setError(error);
@@ -27,6 +31,7 @@ export const useAsync = <T>(
           setStatus("error");
         });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [asyncFn]
   );
 
