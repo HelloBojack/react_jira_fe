@@ -1,10 +1,9 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import SearchInput from "./components/SearchInput";
 import ProjectsTable from "./components/ProjectsTable";
 import { CleanObjectNull, useDebounce, useTitle } from "utils";
 import { useHttp } from "utils/http";
 import { PageHeader } from "antd";
-// import { IUser } from "./data";
 import { useAsync } from "utils/use_async";
 import { useMount } from "../../utils/use_mount";
 import { Content } from "antd/lib/layout/layout";
@@ -13,27 +12,28 @@ const ProjectList = () => {
   useTitle("项目列表");
 
   const { get } = useHttp();
-  const [searchParams, setsearchParams] = useUrlQueryParams([
-    "name",
-    "personId",
-  ]);
+  const [searchParams, setsearchParams] = useUrlQueryParams(
+    useMemo(() => ["name", "personId"], [])
+  );
   const debouncesearchParams = useDebounce(searchParams, 250);
-
+  const getrProjects = useCallback(
+    () => get("projects", CleanObjectNull(debouncesearchParams)),
+    [debouncesearchParams, get]
+  );
   const {
     execute: getProjectList,
     value: projectsList,
     loading,
-  } = useAsync(() => get("projects", CleanObjectNull(debouncesearchParams)));
-  const { execute: getUserList, value: userList } = useAsync(() =>
-    get("users")
+  } = useAsync(getrProjects);
+  const { execute: getUserList, value: userList } = useAsync(
+    useCallback(() => get("users"), [get])
   );
 
-  useMount(() => getUserList());
+  useMount(useCallback(() => getUserList(), [getUserList]));
 
   useEffect(() => {
     getProjectList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncesearchParams]);
+  }, [debouncesearchParams, getProjectList]);
 
   return (
     <Content

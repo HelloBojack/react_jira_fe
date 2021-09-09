@@ -38,6 +38,5 @@ export const useTitle = (title: string) => {
     return () => {
       document.title = tempTitle;
     };
-    // eslint-disable-next-line
   }, [title]);
 };

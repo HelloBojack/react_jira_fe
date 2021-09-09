@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import * as auth from "auth_provider";
 import { IProjects, IProjectsRes } from "pages/ProjectList/data";
 import { FullLoading } from "components/common/index";
@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       .then((user) => setUser(user))
       .catch((error) => console.log(error));
   const register = (data: IProjects) => auth.register(data).then(setUser);
-  const logout = () => auth.logout().then(() => setUser(null));
-  const initUser = async () => {
+  const logout = useCallback(() => auth.logout().then(() => setUser(null)), []);
+  const initUser = useCallback(async () => {
     const token = auth.getToken();
     if (token) {
       const user = await fetch(`${apiUrl}/me`, {
@@ -41,12 +41,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
       setUser(user);
     }
-  };
+  }, []);
   const { execute, status } = useAsync(initUser);
   useEffect(() => {
     execute();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [execute]);
 
   if (status === "idle" || status === "pending") {
     return <FullLoading />;

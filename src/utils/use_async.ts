@@ -31,8 +31,7 @@ export const useAsync = <T>(
           setStatus("error");
         });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [asyncFn]
+    [asyncFn, mountedRef]
   );
 
   useEffect(() => {

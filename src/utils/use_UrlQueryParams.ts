@@ -4,8 +4,6 @@ import { CleanObjectNull } from "utils";
 
 export const useUrlQueryParams = <T extends string>(keys: T[]) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // console.log(searchParams.get("name"));
-
   return [
     useMemo(() => {
       return CleanObjectNull(
@@ -13,8 +11,7 @@ export const useUrlQueryParams = <T extends string>(keys: T[]) => {
           return { ...pre, [key]: searchParams.get(key) };
         }, {})
       ) as { [key in T]: string };
-      // eslint-disable-next-line
-    }, [searchParams]),
+    }, [searchParams, keys]),
     setSearchParams,
   ] as const;
 };
