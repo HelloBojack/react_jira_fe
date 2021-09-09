@@ -20,11 +20,17 @@ export const useHttp = () => {
         "Content-Type": "application/json",
       },
     };
-    if (method.toUpperCase() === "GET") {
-      path += `?${qs.stringify(data)}`;
-    } else {
-      config.body = JSON.stringify(data);
+
+    switch (method.toUpperCase()) {
+      case "GET":
+        path += `?${qs.stringify(data)}`;
+        break;
+      case "POST":
+      case "PATCH":
+        config.body = JSON.stringify(data);
+        break;
     }
+
     return fetch(`${apiUrl}/${path}`, config).then(async (res) => {
       if (res.status === 401) {
         await logout();
@@ -46,5 +52,8 @@ export const useHttp = () => {
   const post = (path: string, data: object) => {
     return init("POST", path, data);
   };
-  return { get, post };
+  const patch = (path: string, data: object) => {
+    return init("PATCH", path, data);
+  };
+  return { get, post, patch };
 };

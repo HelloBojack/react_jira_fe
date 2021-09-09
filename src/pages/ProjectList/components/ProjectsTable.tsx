@@ -4,13 +4,21 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router";
 import { IProjects, IProjectsTable } from "../data";
 import FavStar from "./FavStar";
+import { useEditProject } from "../useHooks/index";
 
 const ProjectsTable = ({ userList, ...props }: IProjectsTable) => {
   let navigate = useNavigate();
+  const { execute } = useEditProject();
+
   const columns = [
     {
       title: <FavStar checked={true} disabled={true} />,
-      render: (item: IProjects) => <FavStar checked={item.pin} />,
+      render: (item: IProjects) => (
+        <FavStar
+          checked={item.pin}
+          onCheckedChange={() => execute({ id: item.id, pin: !item.pin })}
+        />
+      ),
     },
     {
       title: "工作",
