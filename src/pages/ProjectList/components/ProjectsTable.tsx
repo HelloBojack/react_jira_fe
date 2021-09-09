@@ -6,7 +6,11 @@ import { IProjects, IProjectsTable } from "../data";
 import FavStar from "./FavStar";
 import { useEditProject } from "../useHooks/index";
 
-const ProjectsTable = ({ userList, ...props }: IProjectsTable) => {
+const ProjectsTable = ({
+  userList,
+  getProjectList,
+  ...props
+}: IProjectsTable) => {
   let navigate = useNavigate();
   const { execute: favProject } = useEditProject();
 
@@ -16,7 +20,10 @@ const ProjectsTable = ({ userList, ...props }: IProjectsTable) => {
       render: (item: IProjects) => (
         <FavStar
           checked={item.pin}
-          onCheckedChange={() => favProject({ id: item.id, pin: !item.pin })}
+          onCheckedChange={() => {
+            favProject({ id: item.id, pin: !item.pin });
+            getProjectList();
+          }}
         />
       ),
     },

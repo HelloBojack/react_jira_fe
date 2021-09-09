@@ -13,6 +13,7 @@ export interface IProjectsRes {
 }
 export interface IProjectsTable extends TableProps<IProjects> {
   userList: IUser[];
+  getProjectList: () => Promise<void>;
 }
 
 export interface IUser {

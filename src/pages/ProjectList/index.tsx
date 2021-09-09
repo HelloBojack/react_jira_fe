@@ -52,6 +52,7 @@ const ProjectList = () => {
       <ProjectsTable
         dataSource={projectsList || []}
         userList={userList || []}
+        getProjectList={getProjectList}
         loading={loading}
       />
     </Content>
