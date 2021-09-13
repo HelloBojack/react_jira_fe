@@ -11,7 +11,7 @@ const HeaderPro = () => {
 
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="logout">
         <Button
           type="link"
           onClick={() => {
@@ -34,8 +34,11 @@ const HeaderPro = () => {
             onClick={() => navigate("/")}
           />
           <Menu mode="horizontal">
-            <Menu.Item key="1">
+            <Menu.Item key="projects">
               <Link to={"/projects"}>项目列表</Link>
+            </Menu.Item>
+            <Menu.Item key="UseUndoPage">
+              <Link to={"/UseUndoPage"}>UseUndoPage</Link>
             </Menu.Item>
           </Menu>
         </StyledDiv>

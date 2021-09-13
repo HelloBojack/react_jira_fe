@@ -4,6 +4,7 @@ import { Layout } from "antd";
 import HeaderPro from "./components/HeaderPro";
 import ProjectList from "pages/ProjectList";
 import ProjectPage from "pages/ProjectPage";
+import UseUndoPage from "pages/UseUndoPage";
 // import { Useref } from "pages/TestPage/Useref";
 // import { TestPage } from "pages/TestPage";
 // const { SubMenu } = Menu;
@@ -15,7 +16,6 @@ const Index = () => {
       <Router>
         <HeaderPro />
         <Layout
-          // style={{ padding: "0 24px 24px", margin: "24px 0" }}
           style={{
             margin: "24px 24px 0 24px",
             minHeight: "84vh",
@@ -31,8 +31,10 @@ const Index = () => {
           <Routes>
             <Route path={"/projects"} element={<ProjectList />} />
             <Route path={"/project/:id/*"} element={<ProjectPage />} />
+            <Route path={"/UseUndoPage"} element={<UseUndoPage />} />
             <Navigate to={"/projects"} replace={true} />
           </Routes>
+
           {/* <Useref></Useref> */}
           {/* <ProjectList /> */}
           {/* <TestPage></TestPage> */}
