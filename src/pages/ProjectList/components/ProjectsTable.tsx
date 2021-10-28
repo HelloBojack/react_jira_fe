@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { IProjects, IProjectsTable } from "../data";
 import FavStar from "./FavStar";
 import { useEditProject } from "../useHooks/index";
+import { useSetRecoilState } from "recoil";
+import { ModalState } from "store";
 
 const ProjectsTable = ({
   userList,
@@ -13,7 +15,7 @@ const ProjectsTable = ({
 }: IProjectsTable) => {
   let navigate = useNavigate();
   const { execute: favProject } = useEditProject();
-
+  const setModal = useSetRecoilState(ModalState);
   const columns = [
     {
       title: <FavStar checked={true} disabled={true} />,
@@ -51,9 +53,18 @@ const ProjectsTable = ({
     },
     {
       title: "操作",
-      render: (item: IProjects) => (
-        <Button onClick={() => navigate(`/project/${item.id}`)}>操作</Button>
-      ),
+      render: (item: IProjects) => {
+        return (
+          <>
+            <Button onClick={() => navigate(`/project/${item.id}`)}>
+              操作
+            </Button>
+            <Button onClick={() => setModal(true)} style={{ marginLeft: 20 }}>
+              编辑
+            </Button>
+          </>
+        );
+      },
     },
   ];
   return (

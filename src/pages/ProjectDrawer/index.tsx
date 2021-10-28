@@ -3,7 +3,6 @@ import { useRecoilState } from "recoil";
 import { ModalState } from "store";
 const ProjectDrawer = () => {
   const [Modal, setModal] = useRecoilState(ModalState);
-  console.log(Modal);
   return (
     <Drawer
       title="Create a new account"
