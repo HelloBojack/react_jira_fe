@@ -1,12 +1,16 @@
 import { Input, Row, Col, Form, Button } from "antd";
 import { ISearchInput } from "../data";
 import { UserSelect } from "./UserSelect";
+import { useRecoilState } from "recoil";
+import { ModalState } from "store";
 
 const SearchInput = ({
   searchParams,
   setsearchParams,
   userList,
 }: ISearchInput) => {
+  const [Modal, setModal] = useRecoilState(ModalState);
+  console.log(Modal);
   return (
     <>
       <Form labelCol={{ span: 4 }} initialValues={searchParams}>
@@ -31,7 +35,9 @@ const SearchInput = ({
           </Col>
           <Col span={8} style={{ textAlign: "right" }}>
             <Form.Item>
-              <Button type="primary">新建项目</Button>
+              <Button type="primary" onClick={() => setModal(true)}>
+                新建项目
+              </Button>
             </Form.Item>
           </Col>
         </Row>

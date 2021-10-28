@@ -5,13 +5,16 @@ import reportWebVitals from "./reportWebVitals";
 import { DevTools, loadServer } from "jira-dev-tool";
 import "antd/dist/antd.less";
 import { AppProviders } from "context";
+import { RecoilRoot } from "recoil";
 
 loadServer(() => {
   ReactDOM.render(
     <React.StrictMode>
       <AppProviders>
-        <DevTools />
-        <App />
+        <RecoilRoot>
+          <DevTools />
+          <App />
+        </RecoilRoot>
       </AppProviders>
     </React.StrictMode>,
     document.getElementById("root")

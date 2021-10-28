@@ -5,6 +5,7 @@ import HeaderPro from "./components/HeaderPro";
 import ProjectList from "pages/ProjectList";
 import ProjectPage from "pages/ProjectPage";
 import UseUndoPage from "pages/UseUndoPage";
+import ProjectDrawer from "pages/ProjectDrawer";
 // import { Useref } from "pages/TestPage/Useref";
 // import { TestPage } from "pages/TestPage";
 // const { SubMenu } = Menu;
@@ -35,6 +36,7 @@ const Index = () => {
             <Navigate to={"/projects"} replace={true} />
           </Routes>
 
+          <ProjectDrawer />
           {/* <Useref></Useref> */}
           {/* <ProjectList /> */}
           {/* <TestPage></TestPage> */}
